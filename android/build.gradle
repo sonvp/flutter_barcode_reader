@@ -45,21 +45,15 @@ android {
 
 
 protobuf {
-    // Configure the protoc executable
     protoc {
-        // Download from repositories
-        artifact = 'com.google.protobuf:protoc:3.11.4'
-    }
-    plugins {
-        javalite {
-            // The codegen for lite comes as a separate artifact
-            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
-        }
+        artifact = 'com.google.protobuf:protoc:3.8.0'
     }
     generateProtoTasks {
         all().each { task ->
-            task.plugins {
-                javalite { }
+            task.builtins {
+                java {
+                    option "lite"
+                }
             }
         }
     }
@@ -69,6 +63,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
-    implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+    implementation 'com.google.protobuf:protobuf-javalite:3.12.0'
     api 'com.google.android.material:material:1.1.0'
 }
