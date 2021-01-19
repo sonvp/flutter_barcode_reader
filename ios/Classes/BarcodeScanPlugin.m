@@ -1,6 +1,6 @@
 #import "BarcodeScanPlugin.h"
-#if __has_include(<barcode_scan/barcode_scan_javalite-Swift.h>)
-#import <barcode_scan/barcode_scan_javalite-Swift.h>
+#if __has_include(<barcode_scan_javalite/barcode_scan_javalite-Swift.h>)
+#import <barcode_scan_javalite/barcode_scan_javalite-Swift.h>
 #else
 // Support project import fallback if the generated compatibility header
 // is not copied when this plugin is created as a library.
