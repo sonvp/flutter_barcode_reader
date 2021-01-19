@@ -21,3 +21,5 @@ flutter:
       android:
         package: de.mintware.barcode_scan
         pluginClass: BarcodeScanPlugin
+      ios:
+        pluginClass: SwiftBarcodeScanPlugin
