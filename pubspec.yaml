@@ -1,10 +1,10 @@
 name: barcode_scan_javalite
 description: A flutter plugin for scanning 2D barcodes and QRCodes via camera.
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/sonvp/flutter_barcode_reader
 
 dependencies:
-  protobuf: ^1.0.1
+  protobuf: ^2.0.0
   flutter:
     sdk: flutter
 
