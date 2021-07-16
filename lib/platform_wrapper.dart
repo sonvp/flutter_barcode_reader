@@ -17,7 +17,7 @@ class BarcodeScanner {
   static const cameraAccessDenied = 'PERMISSION_NOT_GRANTED';
 
   /// The method channel
-  static const MethodChannel _channel =
+  static const MethodChannel? _channel =
       MethodChannel('de.mintware.barcode_scan');
 
   /// The event channel
@@ -39,21 +39,21 @@ class BarcodeScanner {
     var events = _eventChannel.receiveBroadcastStream();
     var completer = Completer<ScanResult>();
 
-    StreamSubscription subscription;
+    StreamSubscription? subscription;
     subscription = events.listen((event) async {
       if (event is String) {
         if (event == cameraAccessGranted) {
-          subscription.cancel();
+          subscription!.cancel();
           completer.complete(await _doScan(options));
         } else if (event == cameraAccessDenied) {
-          subscription.cancel();
+          subscription!.cancel();
           completer.completeError(PlatformException(code: event));
         }
       }
     });
 
     var permissionsRequested =
-        await _channel.invokeMethod('requestCameraPermission');
+        await _channel!.invokeMethod('requestCameraPermission');
 
     if (permissionsRequested) {
       return completer.future;
@@ -74,7 +74,7 @@ class BarcodeScanner {
                 ..aspectTolerance = options.android.aspectTolerance
               /**/)
         /**/;
-    var buffer = await _channel.invokeMethod('scan', config?.writeToBuffer());
+    var buffer = await _channel!.invokeMethod('scan', config.writeToBuffer());
     var tmpResult = proto.ScanResult.fromBuffer(buffer);
     return ScanResult(
       format: tmpResult.format,
@@ -86,7 +86,7 @@ class BarcodeScanner {
 
   /// Returns the number of cameras which are available
   /// Use n-1 as the index of the camera which should be used.
-  static Future<int> get numberOfCameras {
-    return _channel.invokeMethod('numberOfCameras');
+  static Future<int> get numberOfCameras async{
+    return await _channel!.invokeMethod('numberOfCameras') as int;
   }
 }
